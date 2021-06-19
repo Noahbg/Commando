@@ -417,10 +417,10 @@ class Command {
 	 * @param {?Message} message - The message
 	 * @return {boolean}
 	 */
-	isUsable(message = null) {
+	async isUsable(message = null) {
 		if(!message) return this._globalEnabled;
 		if(this.guildOnly && message && !message.guild) return false;
-		const hasPermission = this.hasPermission(message);
+		const hasPermission = await this.hasPermission(message);
 		return this.isEnabledIn(message.guild) && hasPermission && typeof hasPermission !== 'string';
 	}
 
